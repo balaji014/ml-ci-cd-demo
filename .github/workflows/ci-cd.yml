@@ -36,7 +36,11 @@ jobs:
         run: |
           python --version
           python -c "import dvc, pathspec; print('dvc', dvc.__version__); print('pathspec', pathspec.__version__)"  
-          
+
+      - name: Test S3 access
+        run: |
+          aws s3 ls s3://demo-bucket-balaji014-123/
+
       - name: Pull data and model
         run: dvc pull
 
