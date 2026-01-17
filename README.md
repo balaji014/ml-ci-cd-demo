@@ -70,7 +70,27 @@ kubectl apply -f k8s/manifest.yaml
 
 This creates a `ml-api` Deployment and a `ml-api-svc` LoadBalancer Service. Update the image in `k8s/manifest.yaml` if you build and push a new tag.
 
-## Argo CD
+## AWS EKS Setup Command
+- Create an EKS Cluster with:
+```bash
+eksctl create cluster \
+  --name demo-cluster \
+  --region us-east-1 \
+  --node-type t3.small \
+  --nodes 2
+```
+
+## Install and Configure Argo CD
+
+- Create namespace:
+```bash
+kubectl create namespace argocd
+```
+- Install ArgoCD:
+```bash
+kubectl apply -n argocd \
+  -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
 
 Two Application manifests are provided:
 
@@ -82,6 +102,18 @@ Update `spec.source.repoURL` to your repo before applying:
 ```bash
 kubectl apply -f argocd/argo.yaml
 ```
+## Delete AWS EKS Resources Safely
+```bash
+kubectl delete svc ml-api-svc
+kubectl delete deploy ml-api
+kubectl delete -f argo.yaml
+kubectl delete namespace argocd
+```
+- Delete the cluster
+```bash
+eksctl delete cluster --name demo-cluster
+```
+
 
 ## Notes
 
