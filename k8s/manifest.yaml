@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: ml-api
-          image: balaji4wm/ml-api:75547a83f4aceb3665bf8a2999226e6f07faec9b
+          image: balaji4wm/ml-api:52de367753361dfe11863f6803e1dc6060043304
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
