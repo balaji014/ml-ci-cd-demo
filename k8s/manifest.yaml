@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: ml-api
-          image: docker-username/ml-api:v1
+          image: balaji4wm/ml-api:edb5d017aac7817542691c58d927c4c5fefd5222
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
